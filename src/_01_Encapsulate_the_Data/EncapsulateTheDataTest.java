@@ -14,162 +14,163 @@ import org.junit.jupiter.api.Test;
 
 public class EncapsulateTheDataTest {
 
-    EncapsulateTheData testData = new EncapsulateTheData();
+	EncapsulateTheData testData = new EncapsulateTheData();
 
-    @Test
-    void itemsReceivedEncapsulated() {
+	@Test
+	void itemsReceivedEncapsulated() {
 
-        assertTrue(isEncapsulated("itemsReceived"));
+		assertTrue(isEncapsulated("itemsReceived"));
 
-    }
+	}
 
-    @Test
-    void itemsReceivedGetterSetter() {
+	@Test
+	void itemsReceivedGetterSetter() {
 
-        int randomPositiveNum = new Random().nextInt(100 + 1);
+		int randomPositiveNum = new Random().nextInt(100 + 1);
 
-        testData.setItemsReceived(randomPositiveNum);
+		testData.setItemsReceived(randomPositiveNum);
 
-        assertEquals(randomPositiveNum, testData.getItemsReceived());
+		assertEquals(randomPositiveNum, testData.getItemsReceived());
 
-    }
+	}
 
-    @Test
-    void itemsReceivedNotNegative() {
+	@Test
+	void itemsReceivedNotNegative() {
 
-        int randomNegativeNum = new Random().nextInt(100) - 100;
+		int randomNegativeNum = new Random().nextInt(100) - 100;
 
-        testData.setItemsReceived(randomNegativeNum);
+		testData.setItemsReceived(randomNegativeNum);
 
-        assertEquals(0, testData.getItemsReceived());
+		testData.setItemsReceived(0);
 
-    }
+		assertEquals(0, testData.getItemsReceived());
 
-    @Test
-    void degreesTurnedEncapsulated() {
+	}
 
-        assertTrue(isEncapsulated("degreesTurned"));
+	@Test
+	void degreesTurnedEncapsulated() {
 
-    }
+		assertTrue(isEncapsulated("degreesTurned"));
 
-    @Test
-    void degreesTurnedGetterSetter() {
+	}
 
-        double randomPositiveNum = new Random().nextDouble() * 360;
+	@Test
+	void degreesTurnedGetterSetter() {
 
-        testData.setDegreesTurned(randomPositiveNum);
+		double randomPositiveNum = new Random().nextDouble() * 360;
 
-        assertEquals(randomPositiveNum, testData.getDegreesTurned());
+		testData.setDegreesTurned(randomPositiveNum);
 
-    }
+		assertEquals(randomPositiveNum, testData.getDegreesTurned());
 
-    @Test
-    void degreesTurnedNotOutsideBounds() {
+	}
 
-        double randomNumOutsideBounds = new Random().nextDouble() * 360;
+	@Test
+	void degreesTurnedNotOutsideBounds() {
 
-        if (randomNumOutsideBounds >= 180) {
-            randomNumOutsideBounds += 360;
-        } else {
-            randomNumOutsideBounds -= 360;
-        }
+		double randomNumOutsideBounds = new Random().nextDouble() * 360;
 
-        testData.setDegreesTurned(randomNumOutsideBounds);
+		if (randomNumOutsideBounds >= 180) {
+			randomNumOutsideBounds += 360;
+		} else {
+			randomNumOutsideBounds -= 360;
+		}
 
-        double boundedNum = testData.getDegreesTurned();
+		testData.setDegreesTurned(randomNumOutsideBounds);
 
-        assertTrue(boundedNum >= 0 && boundedNum <= 360);
+		double boundedNum = testData.getDegreesTurned();
 
-    }
+		assertTrue(boundedNum >= 0 && boundedNum <= 360);
 
-    @Test
-    void nomenclatureEncapsulated() {
+	}
 
-        assertTrue(isEncapsulated("nomenclature"));
+	@Test
+	void nomenclatureEncapsulated() {
 
-    }
+		assertTrue(isEncapsulated("nomenclature"));
 
-    @Test
-    void nomenclatureGetterSetter() {
+	}
 
-        String randomString = new Random().nextInt() + "";
+	@Test
+	void nomenclatureGetterSetter() {
 
-        testData.setNomenclature(randomString);
+		String randomString = new Random().nextInt() + "";
 
-        assertEquals(randomString, testData.getNomenclature());
+		testData.setNomenclature(randomString);
 
-    }
+		assertEquals(randomString, testData.getNomenclature());
 
-    @Test
-    void nomenclatureNotBlank() {
+	}
 
-        String blankString = "";
+	@Test
+	void nomenclatureNotBlank() {
 
-        testData.setNomenclature(blankString);
+		String blankString = "";
 
-        assertEquals(" ", testData.getNomenclature());
+		testData.setNomenclature(blankString);
 
-    }
+		assertEquals(" ", testData.getNomenclature());
 
-    @Test
-    void memberObjEncapsulated() {
+	}
 
-        assertTrue(isEncapsulated("memberObj"));
+	@Test
+	void memberObjEncapsulated() {
 
-    }
+		assertTrue(isEncapsulated("memberObj"));
 
-    @Test
-    void memberObjGetterSetter() {
+	}
 
-        Object randomObject = new Object();
+	@Test
+	void memberObjGetterSetter() {
 
-        testData.setMemberObj(randomObject);
+		Object randomObject = new Object();
 
-        assertEquals(randomObject, testData.getMemberObj());
+		testData.setMemberObj(randomObject);
 
-    }
+		assertEquals(randomObject, testData.getMemberObj());
 
-    @Test
-    void memberObjNotString() {
+	}
 
-        String blankString = "";
+	@Test
+	void memberObjNotString() {
 
-        testData.setMemberObj(blankString);
+		String blankString = "";
 
-        assertFalse(testData.getMemberObj() instanceof String);
+		testData.setMemberObj(blankString);
 
-    }
+		assertFalse(testData.getMemberObj() instanceof String);
 
-    private boolean isEncapsulated(String memberVariableName) {
+	}
 
-        boolean encapsulated = false;
+	private boolean isEncapsulated(String memberVariableName) {
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(
-                    "src/_01_Encapsulate_the_Data/EncapsulateTheData.java"));
+		boolean encapsulated = false;
 
-            String line = br.readLine();
+		try {
+			BufferedReader br = new BufferedReader(
+					new FileReader("src/_01_Encapsulate_the_Data/EncapsulateTheData.java"));
 
-            while (line != null) {
+			String line = br.readLine();
 
-                if (line.contains(memberVariableName) && !line.contains("*")) {
-                    encapsulated = line.contains("private") || line.contains("protected");
-                    break;
-                }
+			while (line != null) {
 
-                line = br.readLine();
-            }
+				if (line.contains(memberVariableName) && !line.contains("*")) {
+					encapsulated = line.contains("private") || line.contains("protected");
+					break;
+				}
 
-            br.close();
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
+				line = br.readLine();
+			}
 
-            ex.printStackTrace();
-        }
+			br.close();
+		} catch (FileNotFoundException ex) {
+			ex.printStackTrace();
+		} catch (IOException ex) {
 
-        return encapsulated;
-    }
+			ex.printStackTrace();
+		}
+
+		return encapsulated;
+	}
 
 }
-
