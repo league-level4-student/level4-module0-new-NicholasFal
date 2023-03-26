@@ -27,7 +27,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 	 * 
 	 * 3. Create a Direction enum with UP, DOWN, LEFT, and RIGHT values.
 	 */
-
+	
 	public static final Color BORDER_COLOR = Color.WHITE;
 	public static final Color BACKGROUND_COLOR = Color.BLACK;
 	public static final Color FOOD_COLOR = Color.RED;
@@ -116,6 +116,20 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * 
 		 * Hint: KeyEvent.VK_UP.
 		 */
+		switch (e) {
+		case KeyEvent.VK_UP:
+			currentDirection = Direction.UP;
+			break;
+		case KeyEvent.VK_DOWN:
+			currentDirection = Direction.DOWN;
+			break;
+		case KeyEvent.VK_LEFT:
+			currentDirection = Direction.LEFT;
+			break;
+		case KeyEvent.VK_RIGHT:
+			currentDirection = Direction.Right;
+			break;
+		}
 
 	}
 
