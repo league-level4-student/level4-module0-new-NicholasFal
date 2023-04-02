@@ -118,16 +118,16 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 */
 		switch (e) {
 		case KeyEvent.VK_UP:
-			currentDirection = Direction.UP;
+			snake.setDirection(Direction.UP);
 			break;
 		case KeyEvent.VK_DOWN:
-			currentDirection = Direction.DOWN;
+			snake.setDirection(Direction.DOWN);
 			break;
 		case KeyEvent.VK_LEFT:
-			currentDirection = Direction.LEFT;
+			snake.setDirection(Direction.LEFT);
 			break;
 		case KeyEvent.VK_RIGHT:
-			currentDirection = Direction.Right;
+			snake.setDirection(Direction.RIGHT);
 			break;
 		}
 
