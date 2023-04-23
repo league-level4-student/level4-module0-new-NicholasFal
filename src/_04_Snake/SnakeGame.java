@@ -2,6 +2,7 @@ package _04_Snake;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -116,12 +117,12 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * 
 		 * Hint: KeyEvent.VK_UP.
 		 */
-		switch (e) {
+		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:
-			snake.setDirection(Direction.UP);
+			snake.setDirection(Direction.DOWN);
 			break;
 		case KeyEvent.VK_DOWN:
-			snake.setDirection(Direction.DOWN);
+			snake.setDirection(Direction.UP);
 			break;
 		case KeyEvent.VK_LEFT:
 			snake.setDirection(Direction.LEFT);
@@ -132,11 +133,11 @@ public class SnakeGame implements ActionListener, KeyListener {
 		}
 
 	}
-	Random ran = new Random();
-	Location loc = new Location(ran.nextInt(WIDTH++), ran.nextInt(HEIGHT++));
+	
 
 	private void randomizeFoodLocation() {
-
+		Random ran = new Random();
+		Location loc = new Location(ran.nextInt(WIDTH), ran.nextInt(HEIGHT));
 		/*
 		 * Create a new Location object that is set to a random x and y values between 0
 		 * and the WIDTH and HEIGHT variables respectively.
@@ -149,9 +150,12 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * Hint: Use the snake's isLocationOnSnake method to make sure you don't put the
 		 * food on top of the snake.
 		 */
-		if(!snake.isLocationOnSnake(foodLocation)) {
+		if(!snake.isLocationOnSnake(loc)) {
 		foodLocation = loc;
-		}
+		} 
+//		else {
+//			randomizeFoodLocation();
+//		}
 	}
 
 	private void gameOver() {
@@ -173,7 +177,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 			randomizeFoodLocation();
 			timer.restart();
 		} else {
-			
+			//exit
 		}
 	}
 
@@ -186,7 +190,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * If the snake's head is colliding with its own body or out of bounds call the
 		 * gameOver method.
 		 */
-		if(snake.isHeadCollidingWithBody()) {
+		if(snake.isHeadCollidingWithBody() && snake.isOutOfBounds()) {
 			gameOver();
 		}
 
@@ -194,7 +198,11 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * If the location of the snake's head is equal to the location of the food,
 		 * feed the snake and randomize the food location.
 		 */
-
+		
+		if(snake.getHeadLocation() == foodLocation) {
+			snake.feed();
+			randomizeFoodLocation();
+		}
 		panel.repaint();
 	}
 }

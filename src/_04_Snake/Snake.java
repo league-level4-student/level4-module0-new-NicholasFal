@@ -105,9 +105,9 @@ public class Snake {
 		 * For example, if currentDirection is UP and the passed in direction is DOWN
 		 * this method should return false.
 		 */
-		if(direction == Direction.UP && currentDirection == Direction.DOWN) {
+		if(currentDirection == Direction.UP && direction == Direction.DOWN) {
 			return false;
-		} else if(direction == Direction.DOWN && currentDirection == Direction.UP) {
+		} else if(currentDirection == Direction.DOWN && direction == Direction.UP) {
 			return false;
 		} else if(direction == Direction.LEFT && currentDirection == Direction.RIGHT) {
 			return false;
@@ -132,20 +132,26 @@ public class Snake {
 		 * Location created in step 2 for the Location and the BODY_SIZE constant for
 		 * the size.
 		 */
-		SnakeSegment segmentHead = new SnakeSegment(getHeadLocation(), BODY_SIZE);
-		head = segmentHead;
+		//SnakeSegment segmentHead = new SnakeSegment(getHeadLocation(), BODY_SIZE);
+		head = new SnakeSegment(location, BODY_SIZE);
 
 		// Add the head to the snake.
 		snake.add(head);
 	}
-
+	
 	public boolean isOutOfBounds() {
-
+		Location headL = head.getLocation();
 		/*
 		 * Complete the method so it returns true if the head of the snake is outside of
 		 * the window and false otherwise.
 		 */
 		
+		if(headL.getX() > SnakeGame.WIDTH || headL.getX() < 0) {
+			return true;
+		}
+		if(headL.getY() > SnakeGame.HEIGHT || headL.getY() < 0) {
+			return true;
+		}
 		return false;
 	}
 
@@ -155,15 +161,15 @@ public class Snake {
 		 * Complete the method so it returns true if the head is located in the same
 		 * location as any other body segment.
 		 */
-		boolean collide = false;
+	
 		for(SnakeSegment snake : snake) {
 			if(snake != head) {
 				if(head.getLocation() == snake.getLocation()) {
-					collide = true;
+					return true;
 				}
 			}
 		}
-		return collide;
+		return false;
 	}
 
 	public boolean isLocationOnSnake(Location loc) {
@@ -172,13 +178,12 @@ public class Snake {
 		 * Complete the method so it returns true if the passed in location is located
 		 * on the snake.
 		 */
-		boolean onSnake = false;
 		for(SnakeSegment snake : snake) {
 			if(snake.getLocation() == loc) {
-				onSnake = true;
+				return true;
 			}
 		}
-		return onSnake;
+		return false;
 	}
 
 	public void draw(Graphics g) {
