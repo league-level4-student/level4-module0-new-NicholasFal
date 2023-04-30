@@ -97,7 +97,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 	}
 
 	public static void main(String[] args) {
-		new SnakeGame();
+		new SnakeGame(); 
 	}
 
 	@Override
@@ -119,10 +119,10 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 */
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:
-			snake.setDirection(Direction.DOWN);
+			snake.setDirection(Direction.UP);
 			break;
 		case KeyEvent.VK_DOWN:
-			snake.setDirection(Direction.UP);
+			snake.setDirection(Direction.DOWN);
 			break;
 		case KeyEvent.VK_LEFT:
 			snake.setDirection(Direction.LEFT);
@@ -137,7 +137,9 @@ public class SnakeGame implements ActionListener, KeyListener {
 
 	private void randomizeFoodLocation() {
 		Random ran = new Random();
-		Location loc = new Location(ran.nextInt(WIDTH), ran.nextInt(HEIGHT));
+		int x = ran.nextInt(WIDTH);
+		int y = ran.nextInt(HEIGHT);
+		Location loc = new Location(x, y);
 		/*
 		 * Create a new Location object that is set to a random x and y values between 0
 		 * and the WIDTH and HEIGHT variables respectively.
@@ -190,7 +192,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * If the snake's head is colliding with its own body or out of bounds call the
 		 * gameOver method.
 		 */
-		if(snake.isHeadCollidingWithBody() && snake.isOutOfBounds()) {
+		if(snake.isHeadCollidingWithBody() || snake.isOutOfBounds()) {
 			gameOver();
 		}
 
@@ -199,7 +201,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * feed the snake and randomize the food location.
 		 */
 		
-		if(snake.getHeadLocation() == foodLocation) {
+		if(snake.getHeadLocation().equals(foodLocation)) {
 			snake.feed();
 			randomizeFoodLocation();
 		}

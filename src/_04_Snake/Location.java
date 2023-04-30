@@ -4,16 +4,16 @@ public class Location {
 private int x;
 private int y;
 public Location(int x, int y) {
-	this.x = x;
+	this.x = x ;
 	this.y = y;
 }
-private boolean equals(int x, int y) {
-	if(this.x == x && this.y == y) {
-		return true;
-	} else {
-		return false;
-	}
-}
+public boolean equals(Location location) {
+	   if(getX() == location.getX() && getY() == location.getY()) {
+	    return true;
+	   } else {
+	    return false;
+	   }
+	  }
 public int getX() {
 	return x;
 }

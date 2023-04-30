@@ -53,10 +53,10 @@ public class Snake {
 			x++;
 			break;
 		case UP:
-			y++;
+			y--;
 			break;
 		case DOWN:
-			y--;
+			y++;
 			break;
 		}
 			
@@ -81,7 +81,7 @@ public class Snake {
 		canMove = true;
 	}
 
-	public void setDirection(Direction direction) {
+	public  void setDirection(Direction direction) {
 
 		/*
 		 * If the passed in direction is not the opposite direction of currentDirection
